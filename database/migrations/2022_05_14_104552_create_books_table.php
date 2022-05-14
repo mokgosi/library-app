@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('author');
             $table->text('description');
             $table->integer('no_of_issues');
-            $table->integer('isbn');
+            $table->bigInteger('isbn');
             $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

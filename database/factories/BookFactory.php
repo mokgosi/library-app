@@ -21,7 +21,6 @@ class BookFactory extends Factory
             'title' => $this->faker->catchPhrase(),
             'author' => $this->faker->name(),
             'description' => $this->faker->paragraph(),
-            'phone' => $this->faker->e164PhoneNumber(),
             'isbn' => $this->faker->isbn13(),
             'category_id' => rand(1,10),
             'no_of_issues' => rand(1,5)

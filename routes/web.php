@@ -34,7 +34,7 @@ Route::get('/members', function (Request $request) {
     return view('members',[
         // 'audit-trail' => []
     ]);
-})->middleware(['auth'])->name('audit_trails');
+})->middleware(['auth'])->name('members');
 
 require __DIR__.'/auth.php';
 
