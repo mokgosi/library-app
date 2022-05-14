@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
+use App\Http\Resources\MemberResource;
 use App\Models\Member;
 
 class MemberController extends Controller
@@ -16,7 +17,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        return MemberResource::collection(Member::all());
     }
 
     /**
@@ -27,7 +28,9 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        //
+        $member= Member::create($request->validated());
+
+        return new MemberResource($member);
     }
 
     /**
@@ -38,7 +41,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        //
+        return new MemberResource($member);
     }
 
     /**
@@ -50,7 +53,9 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request, Member $member)
     {
-        //
+        $member->update($request->validated());
+        
+        return new MemberResource($member);
     }
 
     /**
@@ -61,6 +66,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return response()->noContent();
     }
 }

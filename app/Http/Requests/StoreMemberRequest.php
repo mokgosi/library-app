@@ -13,7 +13,7 @@ class StoreMemberRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StoreMemberRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'id_number' => 'nullable|digits:13',
+            'date_of_birth' => 'required',
+            'home_address' => 'nullable',
+            'email' => 'nullable|email', // check unique, check update create
+            'phone' => ['required','regex:/^(\+27|0)[6-8][0-9]{8}$/'],
         ];
     }
 }

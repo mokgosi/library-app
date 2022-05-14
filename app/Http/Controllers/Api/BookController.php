@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 
 class BookController extends Controller
@@ -16,7 +17,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return BookResource::collection(Book::select('books.id','books.title', 
+            'books.description', 'books.author', 'books.isbn', 'categories.name as category')
+            ->join('categories', 'categories.id','=','books.category_id')
+            ->get());
     }
 
     /**
@@ -27,7 +31,9 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+        $book = Book::create($request->validated());
+
+        return new BookResource($book);
     }
 
     /**
@@ -38,7 +44,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return new BookResource($book);
     }
 
     /**
@@ -50,7 +56,9 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->validated());
+        
+        return new BookResource($book);
     }
 
     /**
@@ -61,6 +69,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return response()->noContent();
     }
 }
