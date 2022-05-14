@@ -1,11 +1,4 @@
 <template>
-    <!-- <div v-if="errors">
-        <div v-for="(v, k) in errors" :key="k" class="bg-red-500 text-white rounded font-bold mb-4 shadow-lg py-2 px-4 pr-0">
-            <p v-for="error in v" :key="error" class="text-sm">
-                {{ error }}
-            </p>
-        </div>
-    </div> -->
     <form class="space-y-6" @submit.prevent="saveMember">
         <div>
             <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
@@ -120,10 +113,9 @@ export default {
     },
     setup(props) {
         
-        const { errors, member, members, getMember, getMembers, updateMember} = useMembers();
+        const { errors, member, getMember, updateMember} = useMembers();
 
         onMounted(getMember(props.id))
-        onMounted(getMembers)
 
         const saveMember = async () => {
             await updateMember(props.id);
@@ -132,7 +124,6 @@ export default {
         return {
             member,
             errors,
-            members,
             saveMember
         }
     }
