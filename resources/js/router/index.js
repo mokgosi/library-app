@@ -57,6 +57,19 @@ const routes = [
         name: 'members.edit',
         component: MemberEdit,
         props: true
+    },  {
+        path: '/transactions',
+        name: 'transactions.index',
+        component: TransactionsIndex,
+    }, {
+        path: '/transactions/create',
+        name: 'transactions.create',
+        component: TransactionCreate,
+    }, {
+        path: '/transactions/edit',
+        name: 'transactions.edit',
+        component: TransactionEdit,
+        props: true
     }
 ];
 

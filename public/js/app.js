@@ -27921,6 +27921,19 @@ var routes = [{
   name: 'members.edit',
   component: _components_members_MemberEdit__WEBPACK_IMPORTED_MODULE_8__["default"],
   props: true
+}, {
+  path: '/transactions',
+  name: 'transactions.index',
+  component: TransactionsIndex
+}, {
+  path: '/transactions/create',
+  name: 'transactions.create',
+  component: TransactionCreate
+}, {
+  path: '/transactions/edit',
+  name: 'transactions.edit',
+  component: TransactionEdit,
+  props: true
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue_router__WEBPACK_IMPORTED_MODULE_10__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_10__.createWebHistory)(),
