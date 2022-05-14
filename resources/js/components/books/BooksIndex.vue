@@ -56,7 +56,7 @@
 </template>
 <script>
 
-import useStudents from "../../composables/books"
+import useBooks from "../../composables/books"
 import { onMounted, reactive } from "vue";
 
 import 'vue-good-table-next/dist/vue-good-table-next.css'
@@ -65,31 +65,35 @@ import { VueGoodTable } from 'vue-good-table-next'
 export default {
     components: { VueGoodTable },
     setup() {
-        const { categories, getCategories, destroyCategory} = useCategories();
+        const { books, getBooks, destroyBook} = useBooks();
 
         const tdHClass = "x-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100"
         const tdCClass = "px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200"
 
         const columns = reactive([
-            {label: "Name", field: 'name', tdClass: tdCClass, thClass: tdHClass},
+            {label: "Title", field: 'title', tdClass: tdCClass, thClass: tdHClass},
+            {label: "Category", field: 'category', tdClass: tdCClass, thClass: tdHClass},
+            {label: "Author", field: 'author', tdClass: tdCClass, thClass: tdHClass},
+            {label: "ISBN", field: 'isbn', tdClass: tdCClass, thClass: tdHClass},
+            {label: "Copies", field: 'no_of_issues', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Edit', field: 'before', sortable: false, tdClass: tdCClass, thClass: tdHClass},
             {label: 'Delete', field: 'after', sortable: false, tdClass: tdCClass, thClass: tdHClass}
         ]);
 
-        onMounted(getCategories);
+        onMounted(getBooks);
         
-        const deleteCategory = async (id) => {
+        const deleteBook = async (id) => {
             if (!window.confirm("Are you sure?")) {
                 return;
             }
-            await destroyCategory(id);
-            await getCategories();
+            await destroyBook(id);
+            await getBooks();
         };
 
         return {
             columns,
-            categories,
-            deleteCategory,
+            books,
+            deleteBook,
         };
     },
 };

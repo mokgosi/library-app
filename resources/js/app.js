@@ -3,7 +3,7 @@ require('./bootstrap');
 import Alpine from 'alpinejs';
 import { createApp } from 'vue';
 import router from './router';
-import StudentsIndex from './components/books/BooksIndex';
+import BooksIndex from './components/books/BooksIndex';
 
 createApp({
     components: {
