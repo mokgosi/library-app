@@ -1,64 +1,288 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Setup Instructions
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The following instructions assumes that you are familiar with the following technologies and you have them installed and setup on you local environment if needed:
 
-## About Laravel
+- Laravel 8/9
+- PHP >= 8
+- Mysql 8.0.28
+- Laravel sail
+- Docker 20
+- Docker-Compose
+- Node & NPM
+- Git
+- Postman
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Clone the repo from github 
+```
+$ git clone https://github.com/mokgosi/library-app.git
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Install dependencies 
+```
+$ composer install
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Setup Environment variables file in your root directory
+```
+$ cp .env.example .env
+```
 
-## Learning Laravel
+Open .env file from root and setup the following variables
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=student_db
+DB_USERNAME=sail
+DB_PASSWORD=password
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### (OPTIONAL) Run these commands to stop any conflicting running containers and services
+```
+$ sudo aa-remove-unknown
+$ docker container kill $(docker ps -q) // kill all running containers
+$ sudo systemctl start apparmor 
+$ sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/*
+$ sudo systemctl stop apache2
+$ sudo /etc/init.d/mysql stop
+```
 
-## Laravel Sponsors
+### Setup containers and images
+```
+$ ./vendor/bin/sail up 
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Setup application unique key
+```
+$ ./vendor/bin/sail artisan key:generate 
+```
 
-### Premium Partners
+### Database migration and seed
+```
+$ ./vendor/bin/sail artisan migrate:fresh --seed
+```
+### Test your app here
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+http://localhost
 
-## Contributing
+OR
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+TEST using POSTMAN
 
-## Code of Conduct
+### 1. Register to acquire your Bearer Token
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Request
 
-## Security Vulnerabilities
+```
+POST   http://localhost/api/register
+Content-Type: application/json
+Body: 
+{
+    "name": "New User",
+    "email": "user@mail.com",
+    "password": "S3cr3tP@sssw0rd",
+    "password_confirmation": "S3cr3tP@sssw0rd"
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Response:
 
-## License
+```
+{
+    "user": {
+        "name": "New User",
+        "email": "user@mail.com",
+        "updated_at": "2022-05-10T04:17:11.000000Z",
+        "created_at": "2022-05-10T04:17:11.000000Z",
+        "id": 3
+    },
+    "token": "1|Ogz8KZQ7emPer0p8jo0Y65wORBTI1eGAkvv30JXA"
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Login
+
+Request
+
+```
+GET   http://localhost/api/login
+Content-Type: application/json
+Body: 
+{
+    "email": "user@mail.com",
+    "password": "S3cr3tP@sssw0rd",
+}
+```
+
+Response:
+
+```
+{
+    "user": {
+        "id": 3,
+        "name": "New User",
+        "email": "user@mail.com",
+        "email_verified_at": null,
+        "created_at": "2022-05-10T04:17:11.000000Z",
+        "updated_at": "2022-05-10T04:17:11.000000Z"
+    },
+    "token": "2|RYYCbpILwVsvrnIrWzbR3jd5jrc5FMo7g06d6DwE"
+}
+```
+
+### 3. Get Student List
+
+Request
+
+```
+GET   http://localhost/api/students
+Content-Type: application/json
+Bearer: 2|RYYCbpILwVsvrnIrWzbR3jd5jrc5FMo7g06d6DwE
+```
+
+Response:
+
+```
+{
+    "data": [
+    {
+        "id": 1,
+        "first_name": "Dovie",
+        "last_name": "Harvey",
+        "id_number": "3579508079000",
+        "date_of_birth": "2003-02-24",
+        "home_address": "451 Avis Harbors\nSouth Bernitaborough, KY 07822-3835",
+        "email": "khills@example.com",
+        "phone": "+17033748497",
+        "school_id": 5,
+        "created_at": "2022-05-09T13:50:56.000000Z",
+        "updated_at": "2022-05-09T13:50:56.000000Z",
+        "school": {
+            "id": 5,
+            "name": "Ernser, Mertz and Leuschke",
+            "area": "Turkmenistan",
+            "province_id": 7,
+            "created_at": "2022-05-09T13:50:56.000000Z",
+            "updated_at": "2022-05-09T13:50:56.000000Z",
+            "students_count": 5
+        }
+    },
+    ........
+}
+```
+
+4. Get School List
+
+Request
+
+```
+GET   http://localhost/api/schools
+Content-Type: application/json
+Bearer: 2|RYYCbpILwVsvrnIrWzbR3jd5jrc5FMo7g06d6DwE
+```
+
+Response:
+
+```
+{
+    "data": [
+    {
+        "id": 1,
+        "name": "Kerluke LLC",
+        "area": "Lesotho",
+        "province_id": 6,
+        "created_at": "2022-05-09T13:50:56.000000Z",
+        "updated_at": "2022-05-09T13:50:56.000000Z",
+        "students_count": 4,
+        "province": {
+            "id": 6,
+            "name": "Eastern Cape"
+        }
+    },
+    ..........
+}
+```
+
+5. Update School
+
+Request
+
+```
+PUT   http://localhost/api/schools/1
+Content-Type: application/json
+Bearer: 2|RYYCbpILwVsvrnIrWzbR3jd5jrc5FMo7g06d6DwE
+Body:
+{
+    "name": "Kerluke LLCC",
+    "province_id": 6,
+    "area": "Lesotho"
+}
+```
+
+Response:
+
+```
+{
+    "data": [
+    {
+        "id": 1,
+        "name": "Kerluke LLC",
+        "area": "Lesotho",
+        "province_id": 6,
+        "created_at": "2022-05-09T13:50:56.000000Z",
+        "updated_at": "2022-05-09T13:50:56.000000Z",
+        "students_count": 4,
+        "province": {
+            "id": 6,
+            "name": "Eastern Cape"
+        }
+    }
+}
+```
+
+5. Update Student
+
+Request
+
+```
+PUT   http://localhost/api/students/1
+Content-Type: application/json
+Bearer: 1|Ogz8KZQ7emPer0p8jo0Y65wORBTI1eGAkvv30JXA
+Body:
+{
+    "first_name": "Dovie",
+    "last_name": "Harvey",
+    "id_number": "3579508079000",
+    "date_of_birth": "2003-02-24",
+    "home_address": "451 Avis Harbors\nSouth Bernitaborough, KY 07822-3835",
+    "email": "khills@example.com",
+    "phone": "0673748497",
+    "school_id": 5
+}
+```
+
+Response:
+
+```
+{
+    "data": [
+    {
+        "id": 1,
+        "name": "Kerluke LLC",
+        "area": "Lesotho",
+        "province_id": 6,
+        "created_at": "2022-05-09T13:50:56.000000Z",
+        "updated_at": "2022-05-09T13:50:56.000000Z",
+        "students_count": 4,
+        "province": {
+            "id": 6,
+            "name": "Eastern Cape"
+        }
+    }
+}
+```
+
+TODO: (Due to time constraints)
+
+- Unit Tests

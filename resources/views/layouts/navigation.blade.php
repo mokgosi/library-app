@@ -16,6 +16,21 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('categoies')" :active="request()->routeIs('categoies')">
+                        {{ __('Categoies') }}
+                    </x-responsive-nav-link>
+                </div>
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('books')" :active="request()->routeIs('books')">
+                        {{ __('Books') }}
+                    </x-responsive-nav-link>
+                </div>
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('members')" :active="request()->routeIs('members')">
+                        {{ __('Members') }}
+                    </x-responsive-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
