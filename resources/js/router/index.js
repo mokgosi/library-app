@@ -50,7 +50,7 @@ const routes = [
         component: MembersIndex,
     }, {
         path: '/members/create',
-        name: 'members.creaate',
+        name: 'members.create',
         component: MemberCreate,
     }, {
         path: '/members/edit',
