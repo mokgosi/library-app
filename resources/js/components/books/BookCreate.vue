@@ -16,7 +16,7 @@
         <div>
             <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
             <div class="mt-1">
-                <select name="category_id" id="category_id" v-model="school.province_id" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <select name="category_id" id="category_id" v-model="form.category_id" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     <option value="">Select your category</option>
                     <option v-for="category in categories" :value="category.id" :key="category.id">
                         {{ category.name }}
@@ -35,7 +35,7 @@
                 <textarea name="description" id="description"
                     class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     v-model="form.description">
-                </textarea>>
+                </textarea>
             </div>
             <div v-if="errors.description">
                 <p v-for="error in errors.description" :key="error" class="text-sm text-red-500">
@@ -61,7 +61,7 @@
             <div class="mt-1">
                 <input type="text" name="author" id="author"
                     class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    v-model="form.isbn">
+                    v-model="form.author">
             </div>
             <div v-if="errors.author">
                 <p v-for="error in errors.author" :key="error" class="text-sm text-red-500">

@@ -32,16 +32,16 @@ const routes = [
         component: BookEdit,
         props: true
     }, {
-        path: '/cagegories',
-        name: 'cagegories.index',
+        path: '/categories',
+        name: 'categories.index',
         component: CategoriesIndex
     }, {
-        path: '/cagegories/create',
-        name: 'cagegories.create',
+        path: '/categories/create',
+        name: 'categories.create',
         component: CategoryCreate,
     }, {
-        path: '/cagegories/edit',
-        name: 'cagegories.edit',
+        path: '/categories/edit',
+        name: 'categories.edit',
         component: CategoryEdit,
         props: true
     },  {

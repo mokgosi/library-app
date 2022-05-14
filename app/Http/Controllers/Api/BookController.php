@@ -17,7 +17,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return BookResource::collection(Book::select('books.id','books.title', 
+        return BookResource::collection(Book::select('books.id','books.title', 'books.no_of_issues',
             'books.description', 'books.author', 'books.isbn', 'categories.name as category')
             ->join('categories', 'categories.id','=','books.category_id')
             ->get());

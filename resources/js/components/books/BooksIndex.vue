@@ -10,7 +10,7 @@
         <div>
             <vue-good-table
             :columns="columns"
-            :rows="students"
+            :rows="books"
             :line-numbers="true"
             :search-options="{
                 enabled: true

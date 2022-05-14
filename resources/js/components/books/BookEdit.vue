@@ -16,7 +16,7 @@
         <div>
             <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
             <div class="mt-1">
-                <select name="category_id" id="category_id" v-model="school.province_id" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <select name="category_id" id="category_id" v-model="book.category_id" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     <option value="">Select your category</option>
                     <option v-for="category in categories" :value="category.id" :key="category.id">
                         {{ category.name }}
@@ -47,7 +47,7 @@
             <div class="mt-1">
                 <input type="text" name="isbn" id="isbn"
                     class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    v-model="form.isbn">
+                    v-model="book.isbn">
             </div>
             <div v-if="errors.isbn">
                 <p v-for="error in errors.isbn" :key="error" class="text-sm text-red-500">
@@ -60,7 +60,7 @@
             <div class="mt-1">
                 <input type="text" name="author" id="author"
                     class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    v-model="form.author">
+                    v-model="book.author">
             </div>
             <div v-if="errors.author">
                 <p v-for="error in errors.author" :key="error" class="text-sm text-red-500">
@@ -73,7 +73,7 @@
             <div class="mt-1">
                 <input type="text" name="no_of_issues" id="no_of_issues"
                     class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    v-model="form.no_of_issues">
+                    v-model="book.no_of_issues">
             </div>
             <div v-if="errors.no_of_issues">
                 <p v-for="error in errors.no_of_issues" :key="error" class="text-sm text-red-500">
@@ -103,7 +103,7 @@ export default {
     },
     setup(props) {
         
-        const { errors, book, categories, getCategories, updateBook} = useBooks();
+        const { errors, book, categories, getBook, getCategories, updateBook} = useBooks();
 
         onMounted(getBook(props.id))
         onMounted(getCategories)

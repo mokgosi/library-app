@@ -28,7 +28,7 @@ class UpdateBookRequest extends FormRequest
             'description' => 'nullable',
             'author' => 'required',
             'isbn' => 'nullable|digits:13',
-            'cagegory_id' => 'required',
+            'category_id' => 'required',
             'no_of_issues' => 'required:numeric' 
         ];
     }

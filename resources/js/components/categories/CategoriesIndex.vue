@@ -2,7 +2,7 @@
     <div class="flex flex-col">
         <div class="flex place-content-end mb-4">
             <div class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer">
-                <router-link  :to="{ name: 'students.create' }" class="text-sm font-medium">
+                <router-link  :to="{ name: 'categories.create' }" class="text-sm font-medium">
                     Create New
                 </router-link>
             </div>
@@ -10,7 +10,7 @@
         <div>
             <vue-good-table
             :columns="columns"
-            :rows="students"
+            :rows="categories"
             :line-numbers="true"
             :search-options="{
                 enabled: true
