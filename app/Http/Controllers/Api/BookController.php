@@ -7,6 +7,8 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class BookController extends Controller
 {
@@ -17,9 +19,16 @@ class BookController extends Controller
      */
     public function index()
     {
-        return BookResource::collection(Book::select('books.id','books.title', 'books.copies',
-            'books.description', 'books.author', 'books.isbn', 'categories.name as category')
-            ->join('categories', 'categories.id','=','books.category_id')
+        return BookResource::collection(
+            Book::select(
+                'books.id',
+                'books.title', 
+                'books.copies',
+                'books.description', 
+                'books.author', 
+                'books.isbn', 
+                'categories.name as category')
+            ->leftJoin('categories', 'categories.id','=','books.category_id')
             ->get());
     }
 
@@ -44,6 +53,16 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        // $book = Book::withCount(['transactions'=> function (Builder $query) {
+        //     $query->where('status', '=', 'Pending');
+        // }])->get();
+        
+
+        $book->loadCount(['transactions' => function ($query) {
+            $query->where('status',  '=', 'Pending');
+        }]);
+
+
         return new BookResource($book);
     }
 

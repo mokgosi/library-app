@@ -113,7 +113,7 @@
                 <div>
                     <label for="date_due" class="mt-2 block text-sm font-medium text-gray-700">Date Due</label>
                     <div class="mt-2">
-                        <Datepicker v-model="form.date_due" />
+                        <Datepicker v-model="form.date_due" :format="format" :minDate="new Date()" enableSeconds/>
                     </div>
                 </div>
                 <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-zinc-200 uppercase last:mr-0 mr-1">
@@ -123,7 +123,7 @@
 
                 <span class="text-xs font-semibold inline-block py-5 px-5 rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">
                     Available
-                    <span class="mt-2 text-xs font-semibold block">{{book.copies}}</span>
+                    <span class="mt-2 text-xs font-semibold block">{{book.transactions_count}}</span>
                 </span>
             </div>
         </div>
@@ -161,6 +161,19 @@ export default {
             'date_due': '',
         })
 
+        const date = ref(new Date());
+        const format = (date) => {
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const hour = date.getHours();
+            const minutes = date.getMinutes();
+            const seconds = date.getSeconds()
+
+            return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+        }
+
+
         // onMounted(getCategories)
 
         const saveTransaction = async () => {
@@ -168,16 +181,13 @@ export default {
         }
 
         const searchMember = async () => {
-            console.log(form.member_id)
             let response = await axios.get(`/api/members/${form.member_id}`)
             member.value = response.data.data;
-            console.log(member)
         }
 
         const searchBook = async () => {
             let response = await axios.get(`/api/books/${form.book_id}`)
             book.value = response.data.data;
-            console.log(book)
         }
         
         return {
@@ -185,6 +195,7 @@ export default {
             errors,
             member,
             book,
+            format,
             searchBook,
             searchMember,
             saveTransaction,

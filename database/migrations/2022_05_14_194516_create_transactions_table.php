@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('book_id');
             $table->integer('member_id');
             $table->timestamp('date_issued')->useCurrent();
-            $table->date('date_due');
-            $table->date('date_returned')->nullable();
+            $table->timestamp('date_due')->nullable();
+            $table->timestamp('date_returned')->nullable();
             $table->enum('status', ['Pending', 'Completed'])->default('Pending');
             $table->string('penalty')->default('0.00');
             $table->timestamps();

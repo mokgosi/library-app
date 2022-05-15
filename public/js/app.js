@@ -25510,7 +25510,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       'member_id': '',
       'book_id': '',
       'date_due': ''
-    }); // onMounted(getCategories)
+    });
+    var date = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date());
+
+    var format = function format(date) {
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+      var hour = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hour, ":").concat(minutes, ":").concat(seconds);
+    }; // onMounted(getCategories)
+
 
     var saveTransaction = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -25541,16 +25553,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log(form.member_id);
-                _context2.next = 3;
+                _context2.next = 2;
                 return axios.get("/api/members/".concat(form.member_id));
 
-              case 3:
+              case 2:
                 response = _context2.sent;
                 member.value = response.data.data;
-                console.log(member);
 
-              case 6:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -25576,9 +25586,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context3.sent;
                 book.value = response.data.data;
-                console.log(book);
 
-              case 5:
+              case 4:
               case "end":
                 return _context3.stop();
             }
@@ -25596,6 +25605,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       errors: errors,
       member: member,
       book: book,
+      format: format,
       searchBook: searchBook,
       searchMember: searchMember,
       saveTransaction: saveTransaction
@@ -27798,12 +27808,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     modelValue: $setup.form.date_due,
     "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
       return $setup.form.date_due = $event;
-    })
+    }),
+    format: $setup.format,
+    minDate: new Date(),
+    enableSeconds: ""
   }, null, 8
   /* PROPS */
-  , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.copies), 1
+  , ["modelValue", "format", "minDate"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.copies), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.copies), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.transactions_count), 1
   /* TEXT */
   )])])]), _hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {

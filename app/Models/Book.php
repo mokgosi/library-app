@@ -15,4 +15,9 @@ class Book extends Model
     {
         return $this->belongsTo(Catgory::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
