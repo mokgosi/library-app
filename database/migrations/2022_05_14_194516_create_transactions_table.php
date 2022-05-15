@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_id');
+            $table->string('transaction_id')->unique();
             $table->integer('book_id');
             $table->integer('member_id');
-            // $table->date('date_issued')->default('now');
             $table->timestamp('date_issued')->useCurrent();
             $table->date('date_due');
             $table->date('date_returned')->nullable();

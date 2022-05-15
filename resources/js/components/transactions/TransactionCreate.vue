@@ -2,13 +2,14 @@
     <form class="space-y-6" @submit.prevent="saveTransaction">
         <div class="flex">
             <div class="w-1/2 pr-5">
-                <div>
-                    <label for="member_id" class="block text-sm font-medium text-gray-700">Member ID</label>
-                    <div class="mt-1">
+                <div class="bg-gray-300 p-2">
+                    <label for="member_id" class="mt-2 block text-sm font-medium text-gray-700">Member ID</label>
+                    <div class="mt-2">
                         <input type="text" name="member_id" id="member_id"
                             placeholder="Type to search member"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.member_id" />
+                            v-model="form.member_id" 
+                            v-on:change="searchMember"/>
                     </div>
                     <div v-if="errors.member_id">
                         <p v-for="error in errors.member_id" :key="error" class="text-sm text-red-500">
@@ -17,92 +18,108 @@
                     </div>
                 </div>
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Member Name</label>
-                    <div class="mt-1">
+                    <label for="name" class="mt-2 block text-sm font-medium text-gray-700">Member Name</label>
+                    <div class="mt-2">
                         <input type="text" name="name" id="name"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.name" 
+                            v-model="member.first_name" 
                             disabled />
                     </div>
                 </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <div class="mt-1">
-                        <input type="text" name="email" id="email"
-                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.email" 
-                            disabled />
+
+                <div class="flex">
+                    <div class="w-1/2">
+                        <div>
+                            <label for="email" class="mt-2 block text-sm font-medium text-gray-700">Email</label>
+                            <div class="mt-2">
+                                <input type="text" name="email" id="email"
+                                    class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    v-model="member.email" 
+                                    disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 pl-5">
+                        <div>
+                            <label for="phone" class="mt-2 block text-sm font-medium text-gray-700">Phone</label>
+                            <div class="mt-2">
+                                <input type="text" name="phone" id="phone"
+                                    class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    v-model="member.phone" 
+                                    disabled/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <div class="mt-1">
-                        <input type="text" name="phone" id="phone"
-                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.phone" 
-                            disabled/>
-                    </div>
-                </div>
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Home Address</label>
-                    <div class="mt-1">
+                    <label for="phone" class="mt-2 block text-sm font-medium text-gray-700">Home Address</label>
+                    <div class="mt-2">
                         <textarea type="text" name="home_address" id="home_address"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.home_address" 
+                            v-model="member.home_address" 
                             disabled></textarea>
                     </div>
                 </div>
             </div>
             <div class="w-1/2 pl-5">
-                <div>
-                    <label for="book_id" class="block text-sm font-medium text-gray-700">Book ID</label>
-                    <div class="mt-1">
+                <div class="bg-gray-300 p-2">
+                    <label for="book_id" class="mt-2block text-sm font-medium text-gray-700">Book ID</label>
+                    <div class="mt-2">
                         <input type="text" name="book_id" id="book_id"
                             placeholder="Type to search a book"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.book_id" />
+                            v-model="form.book_id" 
+                            v-on:change="searchBook"/>
                     </div>
                 </div>
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                    <div class="mt-1">
+                    <label for="title" class="mt-2 block text-sm font-medium text-gray-700">Title</label>
+                    <div class="mt-2">
                         <input type="text" name="title" id="title"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.book_id" />
+                            v-model="book.title" 
+                            disabled/>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="w-1/2">
+                        <div>
+                            <label for="isdn" class="mt-2 block text-sm font-medium text-gray-700">ISBN</label>
+                            <div class="mt-2">
+                                <input type="text" name="isbn" id="isbn"
+                                    class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    v-model="book.isbn" 
+                                    disabled/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 pl-5">
+                        <div>
+                            <label for="author" class="mt-2 block text-sm font-medium text-gray-700">Author</label>
+                            <div class="mt-2">
+                                <input type="text" name="author" id="author"
+                                    class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    v-model="book.author"
+                                    disabled />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <label for="isdn" class="block text-sm font-medium text-gray-700">ISBN</label>
-                    <div class="mt-1">
-                        <input type="text" name="isbn" id="isbn"
-                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.isbn" />
+                    <label for="date_due" class="mt-2 block text-sm font-medium text-gray-700">Date Due</label>
+                    <div class="mt-2">
+                        <Datepicker v-model="form.date_due" />
                     </div>
                 </div>
-                <div>
-                    <label for="author" class="block text-sm font-medium text-gray-700">Author</label>
-                    <div class="mt-1">
-                        <input type="text" name="author" id="author"
-                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.author">
-                    </div>
-                </div>
-                <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                    <div class="mt-1">
-                        <select name="status" id="status" 
-                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="form.status">
-                            <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-                </div>
-                <div v-if="errors.status">
-                    <p v-for="error in errors.status" :key="error" class="text-sm text-red-500">
-                        {{ error }}
-                    </p>
-                </div>
+                <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-zinc-200 uppercase last:mr-0 mr-1">
+                    Copies 
+                    <span class="mt-2 text-xs font-semibold block">{{book.copies}}</span>
+                </span>
+
+                <span class="text-xs font-semibold inline-block py-5 px-5 rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">
+                    Available
+                    <span class="mt-2 text-xs font-semibold block">5</span>
+                </span>
             </div>
         </div>
         <button type="submit"
@@ -119,15 +136,24 @@
 
 import useTransactions from "../../composables/transactions"
 import { onMounted, reactive } from "vue";
+import { ref } from "vue";
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
+    components: { Datepicker },
     setup() {
         const { errors, storeTransaction } = useTransactions();
+
+        const member = ref([])
+        const book = ref([])
 
         const form = reactive({
             'transaction_id': '',
             'member': '',
             'member_id': '',
+            'book_id': '',
+            'date_due': '',
         })
 
         // onMounted(getCategories)
@@ -135,11 +161,27 @@ export default {
         const saveTransaction = async () => {
             await storeTransaction({...form});
         }
+
+        const searchMember = async () => {
+            console.log(form.member_id)
+            let response = await axios.get(`/api/members/${form.member_id}`)
+            member.value = response.data.data;
+            console.log(member)
+        }
+
+        const searchBook = async () => {
+            let response = await axios.get(`/api/books/${form.book_id}`)
+            book.value = response.data.data;
+            console.log(book)
+        }
         
         return {
             form,
             errors,
-            // categories,
+            member,
+            book,
+            searchBook,
+            searchMember,
             saveTransaction,
         };
     }

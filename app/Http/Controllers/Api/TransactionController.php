@@ -28,6 +28,7 @@ class TransactionController extends Controller
                 'transactions.date_returned', 
                 'transactions.status', 
                 'transactions.penalty', 
+                'transactions.transaction_id', 
                 'books.id', 
                 'books.title', 
                 'books.copies',

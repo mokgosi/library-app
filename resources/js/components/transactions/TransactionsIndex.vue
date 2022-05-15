@@ -71,7 +71,7 @@ export default {
         const tdCClass = "px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200"
 
         const columns = reactive([
-            {label: "Trans ID", field: 'id', tdClass: tdCClass, thClass: tdHClass},
+            {label: "Trans ID", field: 'transaction_id', tdClass: tdCClass, thClass: tdHClass},
             {label: "Member", field: 'member', tdClass: tdCClass, thClass: tdHClass},
             {label: "Title", field: 'title', tdClass: tdCClass, thClass: tdHClass},
             {label: "Date Issued", field: 'date_issued', tdClass: tdCClass, thClass: tdHClass},

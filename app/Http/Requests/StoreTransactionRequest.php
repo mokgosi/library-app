@@ -31,7 +31,7 @@ class StoreTransactionRequest extends FormRequest
             'date_returned' => 'nullable|date',
             'status' => 'nullable',
             'penalty' => 'nullable',
-            'transaction_id' => 'required' 
+            'transaction_id' => 'nullable' 
         ];
     }
 }
