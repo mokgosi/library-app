@@ -22,7 +22,7 @@
                     <div class="mt-2">
                         <input type="text" name="name" id="name"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="member.first_name" 
+                            v-model="member.full_name" 
                             disabled />
                     </div>
                 </div>
@@ -63,13 +63,18 @@
             </div>
             <div class="w-1/2 pl-5">
                 <div class="bg-gray-300 p-2">
-                    <label for="book_id" class="mt-2block text-sm font-medium text-gray-700">Book ID</label>
+                    <label for="book_id" class="mt-2 block text-sm font-medium text-gray-700">Book ID</label>
                     <div class="mt-2">
                         <input type="text" name="book_id" id="book_id"
                             placeholder="Type to search a book"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="form.book_id" 
                             v-on:change="searchBook"/>
+                    </div>
+                    <div v-if="errors.book_id">
+                        <p v-for="error in errors.book_id" :key="error" class="text-sm text-red-500">
+                            {{ error }}
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -118,7 +123,7 @@
 
                 <span class="text-xs font-semibold inline-block py-5 px-5 rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">
                     Available
-                    <span class="mt-2 text-xs font-semibold block">5</span>
+                    <span class="mt-2 text-xs font-semibold block">{{book.copies}}</span>
                 </span>
             </div>
         </div>
