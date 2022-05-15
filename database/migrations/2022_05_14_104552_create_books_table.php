@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->text('description')->nullable();
-            $table->integer('no_of_issues')->default(1);
+            $table->integer('copies')->default(1);
             $table->bigInteger('isbn')->nullable();
             $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

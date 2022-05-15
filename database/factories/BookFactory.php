@@ -23,7 +23,7 @@ class BookFactory extends Factory
             'description' => $this->faker->paragraph(),
             'isbn' => $this->faker->isbn13(),
             'category_id' => rand(1,10),
-            'no_of_issues' => rand(1,5)
+            'copies' => rand(1,5),
         ];
 
     }

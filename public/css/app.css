@@ -737,6 +737,9 @@ select {
 .w-8 {
   width: 2rem;
 }
+.w-1\/2 {
+  width: 50%;
+}
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -972,6 +975,12 @@ select {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pl-5 {
+  padding-left: 1.25rem;
+}
+.pr-5 {
+  padding-right: 1.25rem;
 }
 .text-left {
   text-align: left;

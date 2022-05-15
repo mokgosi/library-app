@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction_id');
             $table->integer('book_id');
             $table->integer('member_id');
-            $table->date('date_issued');
+            // $table->date('date_issued')->default('now');
+            $table->timestamp('date_issued')->useCurrent();
             $table->date('date_due');
-            $table->date('date_returned');
+            $table->date('date_returned')->nullable();
             $table->enum('status', ['Pending', 'Completed'])->default('Pending');
             $table->string('penalty')->default('0.00');
             $table->timestamps();

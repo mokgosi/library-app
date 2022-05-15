@@ -25,12 +25,13 @@ class StoreTransactionRequest extends FormRequest
     {
         return [
             'member_id' => 'required',
-            'book_id' => 'nullable',
+            'book_id' => 'required',
             'date_issued' => 'required|date',
             'date_due' => 'required|date',
-            'date_returned' => 'required|date',
-            'status' => 'required',
-            'penalty' => 'nullable' 
+            'date_returned' => 'nullable|date',
+            'status' => 'nullable',
+            'penalty' => 'nullable',
+            'transaction_id' => 'required' 
         ];
     }
 }

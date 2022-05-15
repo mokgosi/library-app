@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -17,7 +18,23 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return TransactionResource::collection(Transaction::all());
+        // return TransactionResource::collection(Transaction::all());
+
+        return TransactionResource::collection(
+            Transaction::select(
+                'transactions.id',
+                'transactions.date_issued',
+                'transactions.date_due',
+                'transactions.date_returned', 
+                'transactions.status', 
+                'transactions.penalty', 
+                'books.id', 
+                'books.title', 
+                'books.copies',
+                DB::raw("CONCAT(members.first_name,' ',members.last_name) AS member"))
+            ->leftJoin('members', 'members.id','=','transactions.member_id')
+            ->leftJoin('books', 'books.id','=','transactions.book_id')
+            ->get());
     }
 
     /**
@@ -31,6 +48,7 @@ class TransactionController extends Controller
         $transaction= Transaction::create($request->validated());
 
         return new TransactionResource($transaction);
+        
     }
 
     /**

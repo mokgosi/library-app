@@ -36,6 +36,12 @@ Route::get('/members', function (Request $request) {
     ]);
 })->middleware(['auth'])->name('members');
 
+Route::get('/transactions', function (Request $request) {
+    return view('transactions',[
+        // 'audit-trail' => []
+    ]);
+})->middleware(['auth'])->name('transactions');
+
 require __DIR__.'/auth.php';
 
 Route::view('/categories/{any}', 'categories')
@@ -47,5 +53,9 @@ Route::view('/books/{any}', 'books')
 ->where('any','.*');
 
 Route::view('/members/{any}', 'members')
+->middleware('auth')
+->where('any','.*');
+
+Route::view('/transactions/{any}', 'transactions')
 ->middleware('auth')
 ->where('any','.*');

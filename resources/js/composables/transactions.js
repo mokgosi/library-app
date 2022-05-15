@@ -12,12 +12,12 @@ export default function useTransactions() {
 
     const getTransactions = async () => {
         let response = await axios.get('/api/transactions')
-        books.value = response.data.data;
+        transactions.value = response.data.data;
     }
 
     const getTransaction = async (id) => {
         let response = await axios.get(`/api/transactions/${id}`)
-        book.value = response.data.data;
+        transaction.value = response.data.data;
     }
 
     const storeTransaction = async (data) => {
@@ -57,7 +57,7 @@ export default function useTransactions() {
         errors,
         transaction,
         transactions,
-        categories,
+        // categories,
         getTransaction,
         getTransactions,
         storeTransaction,

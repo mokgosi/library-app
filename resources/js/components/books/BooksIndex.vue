@@ -75,7 +75,7 @@ export default {
             {label: "Category", field: 'category', tdClass: tdCClass, thClass: tdHClass},
             {label: "Author", field: 'author', tdClass: tdCClass, thClass: tdHClass},
             {label: "ISBN", field: 'isbn', tdClass: tdCClass, thClass: tdHClass},
-            {label: "Copies", field: 'no_of_issues', tdClass: tdCClass, thClass: tdHClass},
+            {label: "Copies", field: 'copies', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Edit', field: 'before', sortable: false, tdClass: tdCClass, thClass: tdHClass},
             {label: 'Delete', field: 'after', sortable: false, tdClass: tdCClass, thClass: tdHClass}
         ]);

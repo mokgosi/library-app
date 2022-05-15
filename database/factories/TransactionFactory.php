@@ -20,11 +20,12 @@ class TransactionFactory extends Factory
         return [
             'member_id' => rand(1,10),
             'book_id' => rand(1,100),
-            'date_issued' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'date_returned' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'date_due' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'date_issued' => $this->faker->dateTime($max = 'now', $timezone = null),
+            'date_due' => $this->faker->dateTime($max = 'now', $timezone = null),
+            'date_returned' => $this->faker->dateTime($max = 'now', $timezone = null),
             'status' => 'Pending',
-            'penalty' => '0.00'
+            'penalty' => '0.00',
+            'transaction_id' => 'TRANS-'.$this->faker->numerify('#######'),
         ];
 
     }

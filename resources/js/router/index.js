@@ -11,7 +11,13 @@ import CategoryEdit from '../components/categories/CategoryEdit';
 import MembersIndex from '../components/members/MembersIndex';
 import MemberCreate from '../components/members/MemberCreate';
 import MemberEdit from '../components/members/MemberEdit';
+
+import TransactionsIndex from '../components/transactions/TransactionsIndex';
+import TransactionCreate from '../components/transactions/TransactionCreate';
+import TransactionEdit from '../components/transactions/TransactionEdit';
+
 import Dashboard from '../components/Dashboard';
+
 
 const routes = [
     {
