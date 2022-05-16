@@ -113,7 +113,10 @@
                 <div>
                     <label for="date_due" class="mt-2 block text-sm font-medium text-gray-700">Date Due</label>
                     <div class="mt-2">
-                        <Datepicker v-model="form.date_due" :format="format" :minDate="new Date()" enableSeconds/>
+                        <Datepicker 
+                            v-model="form.date_due" 
+                            :minDate="new Date()"
+                            locale="en-ZA" textInput/>
                     </div>
                 </div>
                 <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-zinc-200 uppercase last:mr-0 mr-1">
@@ -164,20 +167,25 @@ export default {
         const date = ref(new Date());
         const format = (date) => {
             const day = date.getDate();
-            const month = date.getMonth() + 1;
+            const month = ("0" + (date.getMonth() + 1)).slice(-2)
             const year = date.getFullYear();
             const hour = date.getHours();
             const minutes = date.getMinutes();
-            const seconds = date.getSeconds()
+            const seconds = ("0" + (date.getSeconds())).slice(-2)
+
+            form.date_due = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
 
             return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
         }
 
+        
 
         // onMounted(getCategories)
 
         const saveTransaction = async () => {
             await storeTransaction({...form});
+            console.log(form.date_due)
+
         }
 
         const searchMember = async () => {

@@ -25515,11 +25515,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var format = function format(date) {
       var day = date.getDate();
-      var month = date.getMonth() + 1;
+      var month = ("0" + (date.getMonth() + 1)).slice(-2);
       var year = date.getFullYear();
       var hour = date.getHours();
       var minutes = date.getMinutes();
-      var seconds = date.getSeconds();
+      var seconds = ("0" + date.getSeconds()).slice(-2);
+      form.date_due = "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hour, ":").concat(minutes, ":").concat(seconds);
       return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hour, ":").concat(minutes, ":").concat(seconds);
     }; // onMounted(getCategories)
 
@@ -25534,6 +25535,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return storeTransaction(_objectSpread({}, form));
 
               case 2:
+                console.log(form.date_due);
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -27809,12 +27813,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
       return $setup.form.date_due = $event;
     }),
-    format: $setup.format,
     minDate: new Date(),
-    enableSeconds: ""
+    locale: "en-ZA",
+    textInput: ""
   }, null, 8
   /* PROPS */
-  , ["modelValue", "format", "minDate"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.copies), 1
+  , ["modelValue", "minDate"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.copies), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.transactions_count), 1
   /* TEXT */

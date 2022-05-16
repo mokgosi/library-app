@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
@@ -46,7 +47,10 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        $transaction= Transaction::create($request->validated());
+        $data = $request->validated();
+        
+        $data['date_due'] = Carbon::parse($request->date_due)->format('Y-m-d H:i:s');
+        $transaction=Transaction::create($data);
 
         return new TransactionResource($transaction);
         
