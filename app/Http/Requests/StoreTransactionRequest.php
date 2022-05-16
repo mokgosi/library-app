@@ -27,7 +27,7 @@ class StoreTransactionRequest extends FormRequest
             'member_id' => 'required',
             'book_id' => 'required',
             'date_issued' => 'nullable|date',
-            'date_due' => 'required|after_or_equal:today',
+            'date_due' => 'nullable|after_or_equal:today',
             'date_returned' => 'nullable|date',
             'status' => 'nullable',
             'penalty' => 'nullable',

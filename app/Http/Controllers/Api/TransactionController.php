@@ -19,24 +19,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        // return TransactionResource::collection(Transaction::all());
+        $transactions = Transaction::with(['member','book'])->get();
 
-        return TransactionResource::collection(
-            Transaction::select(
-                'transactions.id',
-                'transactions.date_issued',
-                'transactions.date_due',
-                'transactions.date_returned', 
-                'transactions.status', 
-                'transactions.penalty', 
-                'transactions.transaction_id', 
-                'books.id', 
-                'books.title', 
-                'books.copies',
-                DB::raw("CONCAT(members.first_name,' ',members.last_name) AS member"))
-            ->leftJoin('members', 'members.id','=','transactions.member_id')
-            ->leftJoin('books', 'books.id','=','transactions.book_id')
-            ->get());
+        return TransactionResource::collection($transactions);
     }
 
     /**
