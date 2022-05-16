@@ -31,6 +31,8 @@ class UpdateMemberRequest extends FormRequest
             'home_address' => 'nullable',
             'email' => 'nullable|email', // check unique, check update create
             'phone' => ['required','regex:/^(\+27|0)[6-8][0-9]{8}$/'],
+            'status' => 'nullable',
+            'penalties' => 'nullable'
         ];
     }
 }

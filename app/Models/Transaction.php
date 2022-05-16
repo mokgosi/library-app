@@ -19,4 +19,9 @@ class Transaction extends Model
             $model->save();
         });
     }
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
 }

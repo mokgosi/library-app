@@ -41,10 +41,19 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        return new MemberResource($member);
+        // $member->loadCount(['transactions' => function ($query) {
+        //     $query->where('status',  '=', 'Pending')
+        //           ->whereNull('date_returned');
+        // }]);
+        $member->with('transactions')
+            ->where('status', 'Pending')
+            ->get();
+            
+        return new MemberResource($member, $member->transactions);
     }
 
     /**
+     * 
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateMemberRequest  $request
@@ -54,7 +63,7 @@ class MemberController extends Controller
     public function update(UpdateMemberRequest $request, Member $member)
     {
         $member->update($request->validated());
-        
+
         return new MemberResource($member);
     }
 

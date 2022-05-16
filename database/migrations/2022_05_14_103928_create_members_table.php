@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('id_number');
             $table->string('date_of_birth');
             $table->string('home_address');
+            $table->float('penalties', 4, 2)->default('0.00');
+            $table->enum('status', ['Active', 'Suspended'])->default('Active');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();

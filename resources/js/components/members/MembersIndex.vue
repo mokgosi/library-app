@@ -77,6 +77,8 @@ export default {
             {label: "Email", field: 'email', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Phone', field: 'phone', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Home Address', field: 'home_address', sortable: false, tdClass: tdCClass, thClass: tdHClass},
+            {label: 'Status', field: 'status', sortable: false, tdClass: tdCClass, thClass: tdHClass },
+            {label: 'Penalties', field: 'penalties', sortable: false, tdClass: tdCClass, thClass: tdHClass },
             {label: 'Edit', field: 'before', sortable: false, tdClass: tdCClass, thClass: tdHClass},
             {label: 'Delete', field: 'after', sortable: false, tdClass: tdCClass, thClass: tdHClass}
         ]);

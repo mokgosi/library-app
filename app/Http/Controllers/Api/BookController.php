@@ -53,15 +53,12 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        // $book = Book::withCount(['transactions'=> function (Builder $query) {
-        //     $query->where('status', '=', 'Pending');
-        // }])->get();
-        
-
         $book->loadCount(['transactions' => function ($query) {
-            $query->where('status',  '=', 'Pending');
+            $query->where('status',  '=', 'Pending')
+                  ->whereNull('date_returned');
         }]);
 
+        $book->transactions_count = ($book->copies - $book->transactions_count);
 
         return new BookResource($book);
     }

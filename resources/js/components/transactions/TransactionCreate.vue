@@ -60,6 +60,67 @@
                             disabled></textarea>
                     </div>
                 </div>
+                <!-- <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-zinc-200 uppercase last:mr-0 mr-1">
+                    Status 
+                    <span class="mt-2 text-xs font-semibold block">{{member.status}}</span>
+                </span>
+                <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-sky-300 uppercase last:mr-0 mr-1">
+                    Books 
+                    <span class="mt-2 text-xs font-semibold block">{{member.transactions_count}}</span>
+                </span>
+                <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-red-300 uppercase last:mr-0 mr-1">
+                    Penalties 
+                    <span class="mt-2 text-xs font-semibold block">{{member.penalties}}</span>
+                </span> -->
+
+                <table class="min-w-full mt-5">
+                    <thead>
+                        <tr>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                ID
+                            </th>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                Title
+                            </th>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                Issued
+                            </th>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                Date Due
+                            </th>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                Penalty
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <template v-for="transaction in member.transactions" :key="transaction.id"> 
+                            <tr>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
+                                    {{ transaction.transaction_id }}
+                                </td>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200" >
+                                    Multi-channelled
+                                </td>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
+                                    {{ transaction.date_issued}}
+                                </td>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
+                                    {{ transaction.date_due}}
+                                </td>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
+                                    0
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+
+
+
+
+
             </div>
             <div class="w-1/2 pl-5">
                 <div class="bg-gray-300 p-2">
@@ -115,6 +176,7 @@
                     <div class="mt-2">
                         <Datepicker 
                             v-model="form.date_due" 
+                            format="format"
                             :minDate="new Date()"
                             locale="en-ZA" textInput/>
                     </div>
@@ -165,6 +227,7 @@ export default {
         })
 
         const date = ref(new Date());
+
         const format = (date) => {
             const day = date.getDate();
             const month = ("0" + (date.getMonth() + 1)).slice(-2)
@@ -178,14 +241,10 @@ export default {
             return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
         }
 
-        
-
         // onMounted(getCategories)
 
         const saveTransaction = async () => {
             await storeTransaction({...form});
-            console.log(form.date_due)
-
         }
 
         const searchMember = async () => {
