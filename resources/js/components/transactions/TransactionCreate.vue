@@ -83,6 +83,9 @@
                                 ID
                             </th>
                             <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                Trans ID
+                            </th>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
                                 Title
                             </th>
                             <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
@@ -92,13 +95,19 @@
                                 Date Due
                             </th>
                             <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
-                                Penalty
+                                Days Overdue
+                            </th>
+                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
+                                Fee
                             </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white">
                         <template v-for="transaction in member.transactions" :key="transaction.id"> 
                             <tr>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
+                                    {{ transaction.id }}
+                                </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
                                     {{ transaction.transaction_id }}
                                 </td>
@@ -112,7 +121,10 @@
                                     {{ transaction.date_due}}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
-                                    0
+                                    {{ transaction.days_overdue}}
+                                </td>
+                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
+                                    {{ transaction.penalty_fee}}
                                 </td>
                             </tr>
                         </template>

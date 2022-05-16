@@ -41,14 +41,11 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        // $member->loadCount(['transactions' => function ($query) {
-        //     $query->where('status',  '=', 'Pending')
-        //           ->whereNull('date_returned');
-        // }]);
+        
         $member->with('transactions')
             ->where('status', 'Pending')
             ->get();
-            
+
         return new MemberResource($member, $member->transactions);
     }
 
