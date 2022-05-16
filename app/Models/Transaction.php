@@ -37,9 +37,9 @@ class Transaction extends Model
 
     public function getDaysOverdueAttribute()
     {
-        $due = Carbon::createFromDate($this->date_due);
+        // $due = Carbon::createFromDate($this->date_due);
         $now = Carbon::now();
-        return ($now > $due) ? $due->diffInDays($now) : 0;
+        return ($now->gt($this->date_due)) ? $this->date_due->diffInDays($now) : 0;
     }
 
     public function getPenaltyFeeAttribute()

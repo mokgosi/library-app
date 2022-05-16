@@ -182,6 +182,7 @@
                             format="format"
                             :minDate="new Date()"
                             locale="en-ZA" textInput/>
+
                     </div>
                 </div>
                 <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-zinc-200 uppercase last:mr-0 mr-1">
@@ -208,8 +209,8 @@
 <script>
 
 import useTransactions from "../../composables/transactions"
-import { onMounted, reactive } from "vue";
-import { ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
+// import Datepicker from 'vue3-datepicker'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 

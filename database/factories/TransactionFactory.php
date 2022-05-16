@@ -20,9 +20,9 @@ class TransactionFactory extends Factory
         return [
             'member_id' => rand(1,10),
             'book_id' => rand(1,100),
-            'date_issued' => $this->faker->dateTime($max = 'now', $timezone = null),
-            'date_due' => $this->faker->dateTime($max = 'now', $timezone = null),
-            'date_returned' => $this->faker->dateTime($max = 'now', $timezone = null),
+            'date_issued' => $this->faker->dateTimeBetween('-1 week'),
+            'date_due' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
+            'date_returned' => null,
             'status' => 'Pending',
             'penalty' => '0.00',
             'transaction_id' => 'TRANS-'.$this->faker->numerify('#######'),
