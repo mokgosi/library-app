@@ -17,16 +17,30 @@
                         </p>
                     </div>
                 </div>
-                <div>
-                    <label for="name" class="mt-2 block text-sm font-medium text-gray-700">Member Name</label>
-                    <div class="mt-2">
-                        <input type="text" name="name" id="name"
-                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            v-model="member.full_name" 
-                            disabled />
+                <div class="flex">
+                    <div class="w-1/2">
+                        <div>
+                            <label for="name" class="mt-2 block text-sm font-medium text-gray-700">Member Name</label>
+                            <div class="mt-2">
+                                <input type="text" name="name" id="name"
+                                    class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    v-model="member.full_name" 
+                                    disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 pl-5">
+                        <div>
+                            <label for="status" class="mt-2 block text-sm font-medium text-gray-700">Status</label>
+                            <div class="mt-2">
+                                <input type="text" name="status" id="status"
+                                    class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    v-model="member.status" 
+                                    disabled/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 <div class="flex">
                     <div class="w-1/2">
                         <div>
@@ -51,27 +65,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div>
                     <label for="phone" class="mt-2 block text-sm font-medium text-gray-700">Home Address</label>
                     <div class="mt-2">
-                        <textarea type="text" name="home_address" id="home_address"
+                        <input type="text" name="home_address" id="home_address"
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="member.home_address" 
-                            disabled></textarea>
+                            disabled />
                     </div>
                 </div>
-                <!-- <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-zinc-200 uppercase last:mr-0 mr-1">
-                    Status 
-                    <span class="mt-2 text-xs font-semibold block">{{member.status}}</span>
-                </span>
-                <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-sky-300 uppercase last:mr-0 mr-1">
-                    Books 
-                    <span class="mt-2 text-xs font-semibold block">{{member.transactions_count}}</span>
-                </span>
-                <span class="mt-2 text-xs font-semibold inline-block py-5 px-5 rounded text-zinc-600 bg-red-300 uppercase last:mr-0 mr-1">
-                    Penalties 
-                    <span class="mt-2 text-xs font-semibold block">{{member.penalties}}</span>
-                </span> -->
 
                 <table class="min-w-full mt-5">
                     <thead>
@@ -115,12 +118,6 @@
                         </template>
                     </tbody>
                 </table>
-
-
-
-
-
-
             </div>
             <div class="w-1/2 pl-5">
                 <div class="bg-gray-300 p-2">
