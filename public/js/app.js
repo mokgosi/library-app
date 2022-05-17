@@ -25488,13 +25488,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _vuepic_vue_datepicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vuepic/vue-datepicker */ "./node_modules/@vuepic/vue-datepicker/dist/vue-datepicker.es.js");
 /* harmony import */ var _vuepic_vue_datepicker_dist_main_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vuepic/vue-datepicker/dist/main.css */ "./node_modules/@vuepic/vue-datepicker/dist/main.css");
-
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -25511,14 +25511,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   setup: function setup() {
     var _useTransactions = (0,_composables_transactions__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+        member = _useTransactions.member,
+        book = _useTransactions.book,
+        book_id_error = _useTransactions.book_id_error,
+        member_id_error = _useTransactions.member_id_error,
+        canBorrow = _useTransactions.canBorrow,
         errors = _useTransactions.errors,
+        searchMember = _useTransactions.searchMember,
+        searchBook = _useTransactions.searchBook,
         storeTransaction = _useTransactions.storeTransaction;
 
-    var member = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
-    var book = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
-    var member_id_error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
-    var book_id_error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
-    var canBorrow = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(true);
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({
       'transaction_id': '',
       'member': '',
@@ -25537,17 +25539,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var seconds = ("0" + date.getSeconds()).slice(-2);
       form.date_due = "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hour, ":").concat(minutes, ":").concat(seconds);
       return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hour, ":").concat(minutes, ":").concat(seconds);
-    }; // onMounted(getCategories)
+    };
 
-
-    var saveTransaction = /*#__PURE__*/function () {
+    var findMember = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return storeTransaction(_objectSpread({}, form));
+                return searchMember(form.member_id);
 
               case 2:
               case "end":
@@ -25557,28 +25558,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }));
 
-      return function saveTransaction() {
+      return function findMember() {
         return _ref.apply(this, arguments);
       };
     }();
 
-    var searchMember = /*#__PURE__*/function () {
+    var findBook = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get("/api/members/".concat(form.member_id)).then(function (response) {
-                  member_id_error.value = '';
-                  member.value = response.data.data;
-
-                  if (response.data.data.transactions.length >= 5) {
-                    canBorrow.value = false;
-                  }
-                })["catch"](function (error) {
-                  member_id_error.value = error.response.data.message;
-                });
+                return searchBook(form.book_id);
 
               case 2:
               case "end":
@@ -25588,30 +25580,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }));
 
-      return function searchMember() {
+      return function findBook() {
         return _ref2.apply(this, arguments);
       };
     }();
 
-    var searchBook = /*#__PURE__*/function () {
+    var saveTransaction = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get("/api/books/".concat(form.book_id)).then(function (response) {
-                  book_id_error.value = '';
-                  book.value = response.data.data;
-
-                  if (response.data.data.transactions_count === 0) {
-                    canBorrow.value = false;
-                  }
-
-                  console.log(response.data.data);
-                })["catch"](function (error) {
-                  book_id_error.value = error.response.data.message;
-                });
+                return storeTransaction(_objectSpread({}, form));
 
               case 2:
               case "end":
@@ -25621,22 +25602,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }));
 
-      return function searchBook() {
+      return function saveTransaction() {
         return _ref3.apply(this, arguments);
       };
     }();
 
     return {
+      errors: errors,
       canBorrow: canBorrow,
       member_id_error: member_id_error,
       book_id_error: book_id_error,
       form: form,
-      errors: errors,
-      member: member,
       book: book,
+      member: member,
       format: format,
-      searchBook: searchBook,
-      searchMember: searchMember,
+      findBook: findBook,
+      findMember: findMember,
       saveTransaction: saveTransaction
     };
   }
@@ -27989,7 +27970,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.form.member_id = $event;
     }),
     onChange: _cache[1] || (_cache[1] = function () {
-      return $setup.searchMember && $setup.searchMember.apply($setup, arguments);
+      return $setup.findMember && $setup.findMember.apply($setup, arguments);
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -28076,7 +28057,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.form.book_id = $event;
     }),
     onChange: _cache[8] || (_cache[8] = function () {
-      return $setup.searchBook && $setup.searchBook.apply($setup, arguments);
+      return $setup.findBook && $setup.findBook.apply($setup, arguments);
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -29434,6 +29415,11 @@ function useTransactions() {
 
   var errors = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
   var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+  var member = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
+  var book = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
+  var member_id_error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
+  var book_id_error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
+  var canBorrow = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(true);
 
   var getTransactions = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -29529,11 +29515,7 @@ function useTransactions() {
     return function storeTransaction(_x2) {
       return _ref3.apply(this, arguments);
     };
-  }(); // const getCategories = async () => {
-  //     let response = await axios.get('/api/categories')
-  //     categories.value = response.data.data;
-  // }
-
+  }();
 
   var updateTransaction = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(id) {
@@ -29577,14 +29559,23 @@ function useTransactions() {
     };
   }();
 
-  var destroyTransaction = /*#__PURE__*/function () {
+  var searchMember = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(id) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/transactions/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/members/".concat(id)).then(function (response) {
+                member_id_error.value = '';
+                member.value = response.data.data;
+
+                if (response.data.data.transactions.length >= 5) {
+                  canBorrow.value = false;
+                }
+              })["catch"](function (error) {
+                member_id_error.value = error.response.data.message;
+              });
 
             case 2:
             case "end":
@@ -29594,21 +29585,80 @@ function useTransactions() {
       }, _callee5);
     }));
 
-    return function destroyTransaction(_x4) {
+    return function searchMember(_x4) {
       return _ref5.apply(this, arguments);
+    };
+  }();
+
+  var searchBook = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/books/".concat(id)).then(function (response) {
+                book_id_error.value = '';
+                book.value = response.data.data;
+
+                if (response.data.data.transactions_count === 0) {
+                  canBorrow.value = false;
+                }
+              })["catch"](function (error) {
+                book_id_error.value = error.response.data.message;
+              });
+
+            case 2:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function searchBook(_x5) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  var destroyTransaction = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/transactions/".concat(id));
+
+            case 2:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function destroyTransaction(_x6) {
+      return _ref7.apply(this, arguments);
     };
   }();
 
   return {
     errors: errors,
+    book_id_error: book_id_error,
+    member_id_error: member_id_error,
     transaction: transaction,
     transactions: transactions,
-    // categories,
+    member: member,
+    book: book,
+    canBorrow: canBorrow,
     getTransaction: getTransaction,
     getTransactions: getTransactions,
     storeTransaction: storeTransaction,
     updateTransaction: updateTransaction,
-    destroyTransaction: destroyTransaction
+    destroyTransaction: destroyTransaction,
+    searchMember: searchMember,
+    searchBook: searchBook
   };
 }
 

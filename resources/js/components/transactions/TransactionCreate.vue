@@ -9,7 +9,7 @@
                             placeholder="Type id to search member - eg. 1,2,3..."
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="form.member_id" 
-                            v-on:change="searchMember"/>
+                            v-on:change="findMember"/>
                     </div>
                     <div v-if="member_id_error">
                         <p class="text-sm text-red-500">
@@ -133,7 +133,7 @@
                             placeholder="Type id to search a book - eg. 1,2,3... "
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="form.book_id" 
-                            v-on:change="searchBook"/>
+                            v-on:change="findBook"/>
                     </div>
                     <div v-if="book_id_error">
                         <p class="text-sm text-red-500">
@@ -218,13 +218,8 @@ import '@vuepic/vue-datepicker/dist/main.css';
 export default {
     components: { Datepicker },
     setup() {
-        const { errors, storeTransaction } = useTransactions();
-
-        const member = ref([])
-        const book = ref([])
-        const member_id_error = ref('');
-        const book_id_error = ref('');
-        const canBorrow = ref(true);
+        const { member, book, book_id_error, member_id_error, canBorrow, errors, 
+                searchMember, searchBook, storeTransaction,  } = useTransactions();
 
         const form = reactive({
             'transaction_id': '',
@@ -250,53 +245,31 @@ export default {
             return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
         }
 
-        // onMounted(getCategories)
+        const findMember = async () => {
+            await searchMember(form.member_id);
+        }
+
+        const findBook = async () => {
+            await searchBook(form.book_id);
+        }
 
         const saveTransaction = async () => {
             await storeTransaction({...form});
         }
-
-        const searchMember = async () => {
-            await axios.get(`/api/members/${form.member_id}`)
-                .then((response) => {
-                    member_id_error.value = ''
-                    member.value = response.data.data;
-                    if(response.data.data.transactions.length >= 5) {
-                        canBorrow.value = false
-                    }
-                })
-                .catch( (error) => {
-                    member_id_error.value = error.response.data.message
-                }) 
-        }
-
-        const searchBook = async () => {
-            await axios.get(`/api/books/${form.book_id}`)
-                .then((response) => {
-                    book_id_error.value = ''
-                    book.value = response.data.data;
-                    if(response.data.data.transactions_count === 0 ) {
-                        canBorrow.value = false
-                    }
-                    console.log(response.data.data)
-                })
-                .catch( (error) => {
-                    book_id_error.value = error.response.data.message
-                }) 
-            
-        }
         
         return {
+            errors,
             canBorrow,
             member_id_error,
             book_id_error,
+            
             form,
-            errors,
-            member,
             book,
+            member,
+
             format,
-            searchBook,
-            searchMember,
+            findBook,
+            findMember,
             saveTransaction,
         };
     }
