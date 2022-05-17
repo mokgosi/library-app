@@ -254,6 +254,7 @@ export default {
         const searchMember = async () => {
             let response = await axios.get(`/api/members/${form.member_id}`)
             member.value = response.data.data;
+            console.log(errors)
         }
 
         const searchBook = async () => {
