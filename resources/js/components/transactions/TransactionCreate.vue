@@ -11,9 +11,9 @@
                             v-model="form.member_id" 
                             v-on:change="searchMember"/>
                     </div>
-                    <div v-if="errors.member_id">
-                        <p v-for="error in errors.member_id" :key="error" class="text-sm text-red-500">
-                            {{ error }}
+                    <div v-if="member_id_error">
+                        <p class="text-sm text-red-500">
+                            {{ member_id_error }}
                         </p>
                     </div>
                 </div>
@@ -135,9 +135,9 @@
                             v-model="form.book_id" 
                             v-on:change="searchBook"/>
                     </div>
-                    <div v-if="errors.book_id">
-                        <p v-for="error in errors.book_id" :key="error" class="text-sm text-red-500">
-                            {{ error }}
+                    <div v-if="book_id_error">
+                        <p class="text-sm text-red-500">
+                            {{ book_id_error }}
                         </p>
                     </div>
                 </div>
@@ -221,6 +221,8 @@ export default {
 
         const member = ref([])
         const book = ref([])
+        const member_id_error = ref('');
+        const book_id_error = ref('');
 
         const form = reactive({
             'transaction_id': '',
@@ -252,17 +254,31 @@ export default {
         }
 
         const searchMember = async () => {
-            let response = await axios.get(`/api/members/${form.member_id}`)
-            member.value = response.data.data;
-            console.log(errors)
+            await axios.get(`/api/members/${form.member_id}`)
+                .then((response) => {
+                    member_id_error.value = ''
+                    member.value = response.data.data;
+                })
+                .catch( (error) => {
+                    member_id_error.value = error.response.data.message
+                }) 
         }
 
         const searchBook = async () => {
-            let response = await axios.get(`/api/books/${form.book_id}`)
-            book.value = response.data.data;
+            await axios.get(`/api/books/${form.book_id}`)
+                .then((response) => {
+                    book_id_error.value = ''
+                    book.value = response.data.data;
+                })
+                .catch( (error) => {
+                    book_id_error.value = error.response.data.message
+                }) 
+            
         }
         
         return {
+            member_id_error,
+            book_id_error,
             form,
             errors,
             member,
