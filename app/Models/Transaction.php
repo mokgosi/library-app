@@ -33,6 +33,13 @@ class Transaction extends Model
                 $model->date_due = $due->addDays(env('BOOKS_BORROWED_TIME_LIMIT_DAYS'));
             }        
         });
+
+        self::updating(function ($model) { 
+            if($model->status === 'Completed') {
+                $due = Carbon::now();
+                $model->date_returned = $due;
+            }
+        });
     }
 
     public function getDaysOverdueAttribute()

@@ -24,7 +24,6 @@ class TransactionFactory extends Factory
             'date_due' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
             'date_returned' => null,
             'status' => 'Pending',
-            'penalty' => '0.00',
             'transaction_id' => 'TRANS-'.$this->faker->numerify('#######'),
         ];
 
