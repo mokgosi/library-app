@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use DateInterval;
+use DateTime;
 
 
 class Transaction extends Model
@@ -26,7 +27,8 @@ class Transaction extends Model
 
         self::creating(function ($model) { 
             if(empty($model->getOriginal('date_due'))) {
-                $dt = Carbon::createFromFormat('Y-m-d H:i:s', $model->date_issued->format('Y-m-d H:i:s'), 'Africa/Johannesburg');
+                // dd($model->date_issued->toISOString());
+                $dt = Carbon::now();
                 $model->date_due = $dt->addDays(env('BOOKS_BORROWED_TIME_LIMIT_DAYS'));
             }        
         });

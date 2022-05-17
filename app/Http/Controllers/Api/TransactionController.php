@@ -33,9 +33,16 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request)
     {
         $data = $request->validated();
+
+        $transactions = Transaction::where('member_id','=', $data['member_id'])
+            ->where('status', '=', 'Pending')->get();
+
+        if(count($transactions) >= env('BOOKS_BORROWED_LIMIT')) {
+            return response()->json(['message' => 'Member reached loan limit'], 422); 
+        }
         
-        $data['date_due'] = Carbon::parse($request->date_due)->format('Y-m-d H:i:s');
-        $transaction=Transaction::create($data);
+        // $data['date_due'] = Carbon::parse($request->date_due)->format('Y-m-d H:i:s');
+        $transaction = Transaction::create($data);
 
         return new TransactionResource($transaction);
         
