@@ -25572,8 +25572,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context2.sent;
                 member.value = response.data.data;
+                console.log(errors);
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -27959,7 +27960,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     name: "member_id",
     id: "member_id",
-    placeholder: "Type to search member",
+    placeholder: "Type id to search member - eg. 1,2,3...",
     "class": "block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.form.member_id = $event;
@@ -28053,7 +28054,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     name: "book_id",
     id: "book_id",
-    placeholder: "Type to search a book",
+    placeholder: "Type id to search a book - eg. 1,2,3... ",
     "class": "block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $setup.form.book_id = $event;

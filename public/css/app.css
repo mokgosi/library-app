@@ -680,9 +680,6 @@ select {
 .mr-5 {
   margin-right: 1.25rem;
 }
-.ml-5 {
-  margin-left: 1.25rem;
-}
 .block {
   display: block;
 }
@@ -758,14 +755,14 @@ select {
 .w-1\/2 {
   width: 50%;
 }
+.w-1\/4 {
+  width: 25%;
+}
 .w-2\/5 {
   width: 40%;
 }
 .w-3\/5 {
   width: 60%;
-}
-.w-1\/4 {
-  width: 25%;
 }
 .min-w-full {
   min-width: 100%;

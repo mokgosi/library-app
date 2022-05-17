@@ -6,7 +6,7 @@
                     <label for="member_id" class="mt-2 block text-sm font-medium text-gray-700">Member ID</label>
                     <div class="mt-2">
                         <input type="text" name="member_id" id="member_id"
-                            placeholder="Type to search member"
+                            placeholder="Type id to search member - eg. 1,2,3..."
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="form.member_id" 
                             v-on:change="searchMember"/>
@@ -130,7 +130,7 @@
                     <label for="book_id" class="mt-2 block text-sm font-medium text-gray-700">Book ID</label>
                     <div class="mt-2">
                         <input type="text" name="book_id" id="book_id"
-                            placeholder="Type to search a book"
+                            placeholder="Type id to search a book - eg. 1,2,3... "
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="form.book_id" 
                             v-on:change="searchBook"/>
