@@ -36,12 +36,17 @@ class TransactionController extends Controller
 
         $transactions = Transaction::where('member_id','=', $data['member_id'])
             ->where('status', '=', 'Pending')->get();
-
+        
+        //user cannot take out 5 books at once
         if(count($transactions) >= env('BOOKS_BORROWED_LIMIT')) {
-            return response()->json(['message' => 'Member reached loan limit'], 422); 
+            return response()->json(['errors' => ['message' => 'Member reached loan limit']], 422); 
         }
         
-        // $data['date_due'] = Carbon::parse($request->date_due)->format('Y-m-d H:i:s');
+        //use cannot take 2 copies of the same book
+        if($transactions->contains('book_id', $data['book_id'])) {
+            return response()->json(['errors' => ['message' => 'Member currently loaning reqeusted book']], 422); 
+        }
+
         $transaction = Transaction::create($data);
 
         return new TransactionResource($transaction);

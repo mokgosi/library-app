@@ -27,12 +27,14 @@ export default function useTransactions() {
     }
 
     const storeTransaction = async (data) => {
+        
         errors.value = ''
         try {
             await axios.post('/api/transactions', data)
             await router.push({ name: 'transactions.index'})
         } catch (e) {
             if (e.response.status === 422) {
+                console.log(e.response.data)
                 errors.value = e.response.data.errors
             }
         }
@@ -76,7 +78,6 @@ export default function useTransactions() {
             .catch( (error) => {
                 book_id_error.value = error.response.data.message
             }) 
-        
     }
 
     const destroyTransaction = async (id) => {

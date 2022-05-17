@@ -196,6 +196,9 @@
                 </span>
             </div>
         </div>
+        <div v-if="errors.message" class="text-sm text-red-500">
+            {{ errors.message }}
+        </div>
         <button type="submit" v-if="canBorrow"
                 class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase bg-gray-800 rounded-md border border-transparent ring-gray-300 transition duration-150 ease-in-out hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring disabled:opacity-25">
             Create
