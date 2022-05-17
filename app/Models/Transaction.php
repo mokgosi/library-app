@@ -21,10 +21,6 @@ class Transaction extends Model
         parent::boot();
         self::created(function ($model) { 
             $model->transaction_id = 'TRANS-' . str_pad($model->id, 7, "0", STR_PAD_LEFT);
-            if(empty($model->date_due)) {
-                $due = Carbon::now();
-                // $model->date_due = $model->date_issued->addDays(env('BOOKS_BORROWED_TIME_LIMIT_DAYS'));
-            }
             $model->save();
         });
 
