@@ -25518,6 +25518,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var book = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
     var member_id_error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
     var book_id_error = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
+    var canBorrow = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(true);
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({
       'transaction_id': '',
       'member': '',
@@ -25571,6 +25572,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("/api/members/".concat(form.member_id)).then(function (response) {
                   member_id_error.value = '';
                   member.value = response.data.data;
+
+                  if (response.data.data.transactions.length >= 5) {
+                    canBorrow.value = false;
+                  }
                 })["catch"](function (error) {
                   member_id_error.value = error.response.data.message;
                 });
@@ -25598,6 +25603,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("/api/books/".concat(form.book_id)).then(function (response) {
                   book_id_error.value = '';
                   book.value = response.data.data;
+
+                  if (response.data.data.copies == response.data.data.transactions_count) {
+                    canBorrow.value = false;
+                  }
+
+                  console.log(response.data.data);
                 })["catch"](function (error) {
                   book_id_error.value = error.response.data.message;
                 });
@@ -25616,6 +25627,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     return {
+      canBorrow: canBorrow,
       member_id_error: member_id_error,
       book_id_error: book_id_error,
       form: form,
@@ -27945,15 +27957,17 @@ var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 var _hoisted_55 = {
   "class": "mt-2 text-xs font-semibold block"
 };
-
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_56 = {
+  key: 0,
   type: "submit",
   "class": "inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase bg-gray-800 rounded-md border border-transparent ring-gray-300 transition duration-150 ease-in-out hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring disabled:opacity-25"
-}, " Create ", -1
-/* HOISTED */
-);
+};
+var _hoisted_57 = {
+  key: 1,
+  "class": "text-red-500"
+};
 
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Datepicker");
@@ -28116,14 +28130,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_53, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.book.transactions_count), 1
   /* TEXT */
-  )])])]), _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  )])])]), $setup.canBorrow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_56, " Create ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_57, "Cannot Borrow!")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'transactions.index'
     },
     "class": "inline-flex items-center font-semibold uppercase rounded-md text-xs px-4 py-2 ml-2 text-gray-900 first-letter:bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_57];
+      return [_hoisted_58];
     }),
     _: 1
     /* STABLE */

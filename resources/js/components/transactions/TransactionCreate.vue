@@ -196,10 +196,11 @@
                 </span>
             </div>
         </div>
-        <button type="submit"
+        <button type="submit" v-if="canBorrow"
                 class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase bg-gray-800 rounded-md border border-transparent ring-gray-300 transition duration-150 ease-in-out hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring disabled:opacity-25">
             Create
         </button>
+        <span v-else class="text-red-500">Cannot Borrow!</span>
         <router-link :to="{ name: 'transactions.index' }" class="inline-flex items-center font-semibold uppercase rounded-md text-xs px-4 py-2 ml-2 text-gray-900 first-letter:bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700   dark:hover:border-gray-600 dark:focus:ring-gray-700" >
             Cancel
         </router-link>
@@ -223,6 +224,7 @@ export default {
         const book = ref([])
         const member_id_error = ref('');
         const book_id_error = ref('');
+        const canBorrow = ref(true);
 
         const form = reactive({
             'transaction_id': '',
@@ -241,6 +243,7 @@ export default {
             const hour = date.getHours();
             const minutes = date.getMinutes();
             const seconds = ("0" + (date.getSeconds())).slice(-2)
+            
 
             form.date_due = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
 
@@ -258,6 +261,9 @@ export default {
                 .then((response) => {
                     member_id_error.value = ''
                     member.value = response.data.data;
+                    if(response.data.data.transactions.length >= 5) {
+                        canBorrow.value = false
+                    }
                 })
                 .catch( (error) => {
                     member_id_error.value = error.response.data.message
@@ -269,6 +275,10 @@ export default {
                 .then((response) => {
                     book_id_error.value = ''
                     book.value = response.data.data;
+                    if(response.data.data.copies == response.data.data.transactions_count ) {
+                        canBorrow.value = false
+                    }
+                    console.log(response.data.data)
                 })
                 .catch( (error) => {
                     book_id_error.value = error.response.data.message
@@ -277,6 +287,7 @@ export default {
         }
         
         return {
+            canBorrow,
             member_id_error,
             book_id_error,
             form,
