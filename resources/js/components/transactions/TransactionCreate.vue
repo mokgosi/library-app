@@ -275,7 +275,7 @@ export default {
                 .then((response) => {
                     book_id_error.value = ''
                     book.value = response.data.data;
-                    if(response.data.data.copies == response.data.data.transactions_count ) {
+                    if(response.data.data.transactions_count === 0 ) {
                         canBorrow.value = false
                     }
                     console.log(response.data.data)

@@ -55,7 +55,7 @@ class BookController extends Controller
     {
         $book->loadCount(['transactions' => function ($query) {
             $query->where('status',  '=', 'Pending')
-                  ->whereNull('date_returned');
+                  ->whereNull('transactions.date_returned');
         }]);
 
         $book->transactions_count = ($book->copies - $book->transactions_count);
