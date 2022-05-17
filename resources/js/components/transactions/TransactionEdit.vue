@@ -3,7 +3,6 @@
 
         <div class="flex">
             <div class="w-1/4 mr-5 bg-zinc-100 p-2 rounded-md">
-
                 <div class>
                     <label for="transaction_id" class="mt-2 block text-sm font-medium text-gray-700">Transaction ID</label>
                     <div class="mt-2">
@@ -14,10 +13,7 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="w-1/4 mr-5 bg-zinc-100 p-2 rounded-md">
-
                 <div class>
                     <label for="status" class="mt-2 block text-sm font-medium text-gray-700">Status</label>
                     <div class="mt-2">
@@ -36,7 +32,7 @@
                     <div class="mt-2">
                         <input type="text" name="penalty" id="penalty"
                                 class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                v-model="transaction.penalty"/>
+                                v-model="transaction.penalty" />
                     </div>
                 </div>
             </div>
@@ -58,8 +54,7 @@
 
                                 <input type="hidden" name="member_id" id="member_id"
                                     class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    v-model="transaction.member_id"
-                                     />
+                                    v-model="transaction.member_id" />
                             </div>
                         </div>
                     </div>
