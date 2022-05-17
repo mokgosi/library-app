@@ -49,7 +49,9 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        return new TransactionResource($transaction);
+        $transaction->with(['member','book'])->get();
+
+        return new TransactionResource($transaction, $transaction->member, $transaction->book);
     }
 
     /**
