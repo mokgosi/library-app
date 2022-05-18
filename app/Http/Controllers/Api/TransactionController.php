@@ -19,8 +19,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        
         $transactions = Transaction::with(['member','book'])->get();
-
         return TransactionResource::collection($transactions);
     }
 
