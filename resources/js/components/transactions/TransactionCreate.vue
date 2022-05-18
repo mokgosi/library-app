@@ -106,19 +106,19 @@
                                     {{ transaction.transaction_id }}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200" >
-                                    Multi-channelled
+                                    {{ transaction.book }}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
-                                    {{ transaction.date_issued}}
+                                    {{ transaction.date_issued }}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
-                                    {{ transaction.date_due}}
+                                    {{ transaction.date_due }}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
-                                    {{ transaction.days_overdue}}
+                                    {{ transaction.days_overdue }}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
-                                    {{ transaction.penalty_fee}}
+                                    {{ transaction.penalty_fee }}
                                 </td>
                             </tr>
                         </template>

@@ -41,11 +41,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        
-        $member->with('transactions')
-            ->where('status', 'Pending')
-            ->get();
-
+        $member->with('transactions.book')->get();
         return new MemberResource($member, $member->transactions);
     }
 

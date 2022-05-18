@@ -60,6 +60,7 @@ export default function useTransactions() {
                 if(response.data.data.transactions.length >= 5) {
                     canBorrow.value = false
                 }
+                console.log(response.data.data);
             })
             .catch( (error) => {
                 member_id_error.value = error.response.data.message

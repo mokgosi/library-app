@@ -27830,13 +27830,9 @@ var _hoisted_26 = {
 var _hoisted_27 = {
   "class": "px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200"
 };
-
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+var _hoisted_28 = {
   "class": "px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200"
-}, " Multi-channelled ", -1
-/* HOISTED */
-);
-
+};
 var _hoisted_29 = {
   "class": "px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200"
 };
@@ -28045,7 +28041,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: transaction.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.transaction_id), 1
     /* TEXT */
-    ), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.date_issued), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.book), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.date_issued), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(transaction.date_due), 1
     /* TEXT */
@@ -29590,6 +29588,8 @@ function useTransactions() {
                 if (response.data.data.transactions.length >= 5) {
                   canBorrow.value = false;
                 }
+
+                console.log(response.data.data);
               })["catch"](function (error) {
                 member_id_error.value = error.response.data.message;
               });
