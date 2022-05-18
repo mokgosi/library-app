@@ -83,9 +83,6 @@
                                 Trans ID
                             </th>
                             <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
-                                Title
-                            </th>
-                            <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
                                 Issued
                             </th>
                             <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-100">
@@ -104,9 +101,6 @@
                             <tr>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
                                     {{ transaction.transaction_id }}
-                                </td>
-                                <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200" >
-                                    {{ transaction.book }}
                                 </td>
                                 <td class="px-3 py-3 text-sm font-medium whitespace-no-wrap border-b border-gray-200">
                                     {{ transaction.date_issued }}
