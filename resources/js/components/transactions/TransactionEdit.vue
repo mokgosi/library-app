@@ -21,7 +21,7 @@
                             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             v-model="transaction.status">
                             <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
+                            <option value="Returned">Returned</option>
                         </select>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         <input type="text" name="date_due" id="date_due"
                                 class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 v-model="transaction.date_due"
-                                disabled />
+                                 />
                     </div>
                 </div>
             </div>

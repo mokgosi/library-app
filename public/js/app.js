@@ -25771,8 +25771,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       tdClass: tdCClass,
       thClass: tdHClass
     }, {
-      label: 'Overdue',
+      label: 'Days Overdue',
       field: 'days_overdue',
+      tdClass: tdCClass,
+      thClass: tdHClass
+    }, {
+      label: 'Penalty',
+      field: 'penalty_fee',
       tdClass: tdCClass,
       thClass: tdHClass
     }, {
@@ -28196,8 +28201,8 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-  value: "Completed"
-}, "Completed", -1
+  value: "Returned"
+}, "Returned", -1
 /* HOISTED */
 );
 
@@ -28508,8 +28513,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
     "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
       return $setup.transaction.date_due = $event;
-    }),
-    disabled: ""
+    })
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.transaction.date_due]])])])])]), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
@@ -28700,11 +28704,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-(0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({
+var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({
   components: {
     BooksIndex: _components_books_BooksIndex__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
-}).use(_router__WEBPACK_IMPORTED_MODULE_2__["default"]).mount('#app');
+}).use(_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+app.config.globalProperties.$filters = {
+  currency: function currency(value) {
+    return 'R ' + value + '.00';
+  }
+};
+app.mount('#app');
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 

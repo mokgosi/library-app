@@ -27,7 +27,7 @@ class UpdateTransactionRequest extends FormRequest
             'member_id' => 'required',
             'book_id' => 'required',
             'date_issued' => 'nullable|date',
-            'date_due' => 'nullable|date|after_or_equal:today',
+            'date_due' => 'nullable|date',
             'date_returned' => 'nullable|date|after_or_equal:today',
             'status' => 'nullable',
             'penalty' => 'nullable',

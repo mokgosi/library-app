@@ -78,7 +78,8 @@ export default {
             {label: "Date Due", field: 'date_due', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Date Returned', field: 'date_returned', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Status', field: 'status', tdClass: tdCClass, thClass: tdHClass},
-            {label: 'Overdue', field: 'days_overdue', tdClass: tdCClass, thClass: tdHClass},
+            {label: 'Days Overdue', field: 'days_overdue', tdClass: tdCClass, thClass: tdHClass},
+            {label: 'Penalty', field: 'penalty_fee', tdClass: tdCClass, thClass: tdHClass},
             {label: 'Edit', field: 'before', sortable: false, tdClass: tdCClass, thClass: tdHClass},
             {label: 'Delete', field: 'after', sortable: false, tdClass: tdCClass, thClass: tdHClass}
         ]);

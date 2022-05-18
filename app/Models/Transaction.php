@@ -33,7 +33,7 @@ class Transaction extends Model
         });
 
         self::updating(function ($model) { 
-            if($model->status === 'Completed') {
+            if($model->status === 'Returned') {
                 $due = Carbon::now();
                 $model->date_returned = $due;
             }

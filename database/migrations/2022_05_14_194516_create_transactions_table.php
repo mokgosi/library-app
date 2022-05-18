@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('date_issued')->useCurrent();
             $table->timestamp('date_due')->nullable();
             $table->timestamp('date_returned')->nullable();
-            $table->enum('status', ['Pending', 'Completed'])->default('Pending');
+            $table->enum('status', ['Pending', 'Returned'])->default('Pending');
             $table->float('penalty', 4, 2)->default('0.00');
             $table->integer('member_id')->unsigned()->index();
             $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
